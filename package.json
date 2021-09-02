@@ -1,0 +1,16 @@
+{
+  "name": "extract_pages_pdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "downloadjs": "^1.4.7",
+    "node-fetch": "^2.6.1",
+    "pdf-lib": "^1.16.0"
+  }
+}
