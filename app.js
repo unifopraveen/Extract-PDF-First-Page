@@ -4,7 +4,7 @@ var path = require('path');
 const {PDFDocument} = require('pdf-lib') 
 
 
-fs.readdir('./asas', (err, files) => {
+fs.readdir('./notProcessedPDF', (err, files) => {
     if (err)
       console.log(err);
     else {
@@ -14,49 +14,21 @@ fs.readdir('./asas', (err, files) => {
         const name = path.parse(file).name;
         (
             async function () {
-                let pdfDoc = await PDFDocument.load(fs.readFileSync(`./asas/${file}`));
+                let pdfDoc = await PDFDocument.load(fs.readFileSync(`./notProcessedPDF/${file}`));
                 pdfBytes = await extractFirstPage( pdfDoc ,[1])
                 fs.writeFileSync(`./firstPagePDF/${name}.pdf`, pdfBytes)
+
+                let oldPath =  path.resolve('./notProcessedPDF', file);
+                let newPath =  `./processedPDF/${file}`;
+
+                fs.rename(oldPath, newPath, function (err) {
+                    if (err) throw err
+                    console.log('Successfully renamed - AKA moved!')
+                  })
+
             }
         )()
       })
     }
   })
 
-
-//------------------------------------------------------------------------------------------------------------------
-
-
-// fs.readdir('./asas', (err, files) => {
-//     if (err)
-//       console.log(err);
-//     else {
-//       console.log("\nCurrent directory filenames:");
-//       files.forEach(file => {
-
-//         // get current file name
-//         const name = path.parse(file).name;
-//         // get current file path
-//         const filepath = path.resolve('./notProcessedPDF', file);
-
-        
-
-         
-         
-//                 //make local urls for pdf work
-//                 let pdfDoc = await PDFDocument.load(fs.readFileSync(filepath));
-
-//                 //make online urls for pdf work
-//   		        // const existingPdfBytes = await fetch(pdfUrl).then(res => res.arrayBuffer())
-//                 // const pdfDoc = await PDFDocument.load(existingPdfBytes)
-
-//                 pdfBytes = extractFirstPage( pdfDoc ,[1])
-//                 fs.writeFileSync(`./firstPagePDF/${name}.pdf`, pdfBytes)
-             
-          
-
-         
-
-//       })
-//     }
-//   })
