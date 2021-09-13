@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^4.1.2",
     "downloadjs": "^1.4.7",
     "node-fetch": "^2.6.1",
+    "node-schedule": "^2.0.0",
     "pdf-lib": "^1.16.0"
   }
 }
